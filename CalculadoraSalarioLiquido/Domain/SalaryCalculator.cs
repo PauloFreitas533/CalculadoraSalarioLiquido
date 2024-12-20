@@ -4,6 +4,11 @@
     {
         public decimal CalculateNetSalary(decimal grossSalary) 
         {
+            if (grossSalary <= 0)
+            {
+                throw new ArgumentException("O salário bruto deve ser maior que zero.");
+            }
+
             decimal calculateINSS = CalculateINSS(grossSalary);
             decimal calculateIR = CalculateIR(grossSalary, calculateINSS);
             return grossSalary - calculateINSS - calculateIR;

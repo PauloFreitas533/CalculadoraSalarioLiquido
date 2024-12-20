@@ -16,6 +16,7 @@ namespace CalculadoraSalarioLiquido.API.Controllers.SalaryControllers
 
         [HttpGet]
         [Route("Index")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Index()
         {
             return View();
@@ -23,6 +24,8 @@ namespace CalculadoraSalarioLiquido.API.Controllers.SalaryControllers
 
         [HttpPost]
         [Route("Calculate")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Calculate(string grossSalary)
         {
             try

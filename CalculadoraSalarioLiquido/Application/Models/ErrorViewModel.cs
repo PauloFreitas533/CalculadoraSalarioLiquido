@@ -1,4 +1,4 @@
-namespace CalculadoraSalarioLiquido.Models
+namespace CalculadoraSalarioLiquido.Application.Models
 {
     public class ErrorViewModel
     {

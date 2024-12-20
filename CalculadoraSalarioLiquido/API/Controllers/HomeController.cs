@@ -1,4 +1,4 @@
-﻿using CalculadoraSalarioLiquido.Models;
+﻿using CalculadoraSalarioLiquido.Application.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

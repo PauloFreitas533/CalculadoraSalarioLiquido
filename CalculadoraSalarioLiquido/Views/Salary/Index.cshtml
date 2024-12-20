@@ -6,7 +6,7 @@
 
 <form method="post" asp-controller="Salary" asp-action="Calculate">
     <div>
-        <label for="grossSalary">Salário Bruto:</label>
+        <label for="grossSalary">Salário Bruto: R$</label>
         <input type="text" id="grossSalary" name="grossSalary" oninput="formatCurrency(this)" required>
     </div>
     <button type="submit">Calcular</button>
