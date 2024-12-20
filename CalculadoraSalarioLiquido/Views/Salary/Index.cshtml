@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Calculadora de Salário";
+}
+
+<h1>Calculadora de Salário Líquido</h1>
+
+<form method="post" asp-controller="Salary" asp-action="Calculate">
+    <div>
+        <label for="grossSalary">Salário Bruto:</label>
+        <input type="text" id="grossSalary" name="grossSalary" oninput="formatCurrency(this)" required>
+    </div>
+    <button type="submit">Calcular</button>
+</form>
+
+@if (ViewBag.NetSalary != null)
+{
+    <h2>Salário Líquido: R$@ViewBag.NetSalary.ToString("N2", new System.Globalization.CultureInfo("pt-BR"))</h2>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+@section Scripts {
+    <script>
+        function formatCurrency(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = (value / 100).toFixed(2) + '';
+            value = value.replace(".", ",");
+            value = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+            input.value = value;
+        }
+    </script>
+}
