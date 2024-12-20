@@ -1,7 +1,11 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using CalculadoraSalarioLiquido.API.Controllers.SalaryControllers;
+using CalculadoraSalarioLiquido.Application.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Moq;
 using Xunit;
 
 namespace CalculadoraSalarioLiquido.Tests.API.Controllers
@@ -39,6 +43,24 @@ namespace CalculadoraSalarioLiquido.Tests.API.Controllers
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Theory]
+        [InlineData("invalid")]
+        [InlineData("")]
+        [InlineData(null)]
+        public void Calculate_ShouldReturnErrorMessage_ForInvalidGrossSalary(string grossSalary)
+        {
+            // Arrange
+            var mockSalaryService = new Mock<SalaryService>(null);
+            var controller = new SalaryController(mockSalaryService.Object);
+
+            // Act
+            var result = controller.Calculate(grossSalary) as ViewResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal("Valor inválido.", result.ViewData["Error"]);
         }
     }
 }

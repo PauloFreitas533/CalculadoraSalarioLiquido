@@ -81,5 +81,18 @@ namespace CalculadoraSalarioLiquido.Tests.Domain
             // Assert
             Assert.Equal(expectedNetSalary, netSalary, 2);
         }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-100)]
+        public void CalculateNetSalary_ShouldThrowArgumentException_ForInvalidGrossSalary(decimal grossSalary)
+        {
+            // Arrange
+            var calculator = new SalaryCalculator();
+            var expectedMessage = "O salário bruto deve ser maior que zero.";
+
+            var exception = Assert.Throws<ArgumentException>(() => calculator.CalculateNetSalary(grossSalary));
+            Assert.Equal(expectedMessage, exception.Message);
+        }
     }
 }
